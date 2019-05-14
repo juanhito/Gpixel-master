@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.gpixel.R;
 
 import java.util.ArrayList;
-public class AdaptadorJuegos extends RecyclerView.Adapter<AdaptadorJuegos.CdViewHolder> implements View.OnClickListener {
+public class AdaptadorJuegos extends RecyclerView.Adapter<AdaptadorJuegos.JuegosViewHolder> implements View.OnClickListener {
 
 
 
@@ -34,16 +34,16 @@ public class AdaptadorJuegos extends RecyclerView.Adapter<AdaptadorJuegos.CdView
     /*--------------------------------   METODOS ADAPTER  -----------------------------------------*/
     @NonNull
     @Override
-    public CdViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public JuegosViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.juego_layout, viewGroup, false);
         v.setOnClickListener(this);
-        CdViewHolder cvh = new CdViewHolder(v);
+        JuegosViewHolder cvh = new JuegosViewHolder(v);
         return cvh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CdViewHolder cdViewHolder, int i) {
-        cdViewHolder.bindCd(datos.get(i));
+    public void onBindViewHolder(@NonNull JuegosViewHolder juegoViewHolder, int i) {
+        juegoViewHolder.bindJuego(datos.get(i));
     }
 
     @Override
@@ -68,18 +68,18 @@ public class AdaptadorJuegos extends RecyclerView.Adapter<AdaptadorJuegos.CdView
     /**
      *
      */
-    public static class CdViewHolder extends RecyclerView.ViewHolder {
+    public static class JuegosViewHolder extends RecyclerView.ViewHolder {
         /*-------------------------------   ATRIBUTOS   ------------------------------------------*/
         private TextView tvTitulo;
         private TextView tvArtista;
 
         /*-------------------------------    CONSTRUCTOR  ----------------------------------------*/
-        public CdViewHolder(@NonNull View itemView) {
+        public JuegosViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitulo = itemView.findViewById(R.id.tvNombre);
         }
         /*----------------------------------    METODOS   ----------------------------------------*/
-        public void bindCd(Juego jg) {
+        public void bindJuego(Juego jg) {
             tvTitulo.setText(jg.getNombre());
         }
     }

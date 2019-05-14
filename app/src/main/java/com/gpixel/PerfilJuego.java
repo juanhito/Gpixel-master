@@ -33,6 +33,7 @@ public class PerfilJuego extends AppCompatActivity {
     private LinearLayoutManager llm;
 
     private ArrayList<Juego> datos;
+    Juego juego;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +41,63 @@ public class PerfilJuego extends AppCompatActivity {
         setContentView(R.layout.activity_perfil_juego);
 
         rvMain = findViewById(R.id.rvJuegos);
-        rvMain.setItemAnimator(new DefaultItemAnimator());
-
+        datos=new ArrayList<Juego>();
+        adaptador=new AdaptadorJuegos(datos);
         llm = new LinearLayoutManager(this);
+
+        rvMain.setItemAnimator(new DefaultItemAnimator());
+        rvMain.setAdapter(adaptador);
         rvMain.setLayoutManager(llm);
 
         /*CARGAR DATOS*/
         cargarDatos();
+        //consumirWS();
+        //prueba();
 
     }
+    public void consumirWS(){
+        Retrofit r = RetrofitClient.getClient(APIRestService.BASE_URL);
+        APIRestService ars = r.create(APIRestService.class);
+        Call<Juego> call = ars.obtenerJuego();
 
-    private void cargarDatos() {
+        call.enqueue(new Callback<Juego>() {
 
-        if (isNetworkAvailable()) {
+            @Override
+            public void onResponse(Call<Juego> call, Response<Juego> response) {
+                if(response.isSuccessful()) {
+                    Juego juego = response.body();
+                    datos.add(juego);
+                    adaptador.notifyDataSetChanged();
+
+                } else {
+                    System.out.print("Eres un inutil");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Juego> call, Throwable t) {
+                System.out.print("Eres un inutil");
+
+            }
+        });
+    }
+
+
+   private void prueba(){
+        Juego J1=new Juego("pureba 1","1");
+        Juego j2=new Juego("prueba 2","2");
+        Juego j3=new Juego("prueba 3","3");
+        datos.add(J1);
+        datos.add(j2);
+        datos.add(j3);
+       adaptador = new AdaptadorJuegos(datos);
+       rvMain.setAdapter(adaptador);
+          }
+
+    private void cargarDatos( ) {
+
+
+       if (isNetworkAvailable()) {
             Retrofit r = RetrofitClient.getClient(APIRestService.BASE_URL);
             APIRestService ars = r.create(APIRestService.class);
             Call<ArrayList<Juego>> call = ars.obtenerCds();
@@ -60,22 +105,21 @@ public class PerfilJuego extends AppCompatActivity {
             call.enqueue(new Callback<ArrayList<Juego>>() {
 
                 @Override
-                public void onResponse(Call<ArrayList<Juego>> call, Response<ArrayList<Juego>> response) {
+               public void onResponse(Call<ArrayList<Juego>> call, Response<ArrayList<Juego>> response) {
                     if (!response.isSuccessful()) {
                         Log.i("Resultado: ", "Error" + response.code());
                     } else {
                         datos = response.body();
                         if (datos != null) {
                             adaptador = new AdaptadorJuegos(datos);
+                            rvMain.setAdapter(adaptador);
                             adaptador.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Intent i = new Intent(PerfilJuego.this,MainActivity.class);
-                                    startActivity(i);
+
                                 }
                             });
-                            rvMain.setAdapter(adaptador);
-                        }
+                       }
 
                     }
                 }
@@ -89,6 +133,7 @@ public class PerfilJuego extends AppCompatActivity {
             Toast.makeText(this, "Error de conexión", Toast.LENGTH_LONG).show();
         }
     }
+
 
     private boolean isNetworkAvailable() {
         boolean isAvailable=false;

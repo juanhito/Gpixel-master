@@ -16,10 +16,14 @@ import retrofit2.http.Query;
  */
 
 public interface APIRestService {
-    public static final String BASE_URL ="https://www.giantbomb.com/api/games/?api_key=[YOUR API KEY]";
+    public static final String BASE_URL ="https://www.giantbomb.com/api/games/?api_key=bd2514fa50bc7f31b80992f4dd257af11aa48f96&format=json&field_list=name";
 
-    @GET("name")
+    @GET("games")
     Call<ArrayList<Juego>> obtenerCds();
+
+    @GET("game")
+    Call<Juego>obtenerJuego();
+
 
 
 }
