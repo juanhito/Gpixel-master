@@ -50,15 +50,15 @@ public class PerfilJuego extends AppCompatActivity {
         rvMain.setLayoutManager(llm);
 
         /*CARGAR DATOS*/
-        cargarDatos();
-        //consumirWS();
+        //cargarDatos();
+        consumirWS();
         //prueba();
 
     }
     public void consumirWS(){
         Retrofit r = RetrofitClient.getClient(APIRestService.BASE_URL);
         APIRestService ars = r.create(APIRestService.class);
-        Call<Juego> call = ars.obtenerJuego();
+        Call<Juego> call = ars.obtenerJuego(ars.Key,ars.format,ars.field_list);
 
         call.enqueue(new Callback<Juego>() {
 
@@ -100,7 +100,7 @@ public class PerfilJuego extends AppCompatActivity {
        if (isNetworkAvailable()) {
             Retrofit r = RetrofitClient.getClient(APIRestService.BASE_URL);
             APIRestService ars = r.create(APIRestService.class);
-            Call<ArrayList<Juego>> call = ars.obtenerCds();
+            Call<ArrayList<Juego>> call = ars.obtenerCds("bd2514fa50bc7f31b80992f4dd257af11aa48f96","json","name");
 
             call.enqueue(new Callback<ArrayList<Juego>>() {
 
