@@ -63,6 +63,7 @@ public class AdaptadorJuegos extends RecyclerView.Adapter<AdaptadorJuegos.Juegos
         this.listener = listener;
     }
 
+
     /*--------------------------------   CLASE INTERNA   ------------------------------------------*/
 
     /**
@@ -73,6 +74,7 @@ public class AdaptadorJuegos extends RecyclerView.Adapter<AdaptadorJuegos.Juegos
         private TextView tvTitulo;
         private TextView tvArtista;
 
+
         /*-------------------------------    CONSTRUCTOR  ----------------------------------------*/
         public JuegosViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,6 +84,8 @@ public class AdaptadorJuegos extends RecyclerView.Adapter<AdaptadorJuegos.Juegos
         public void bindJuego(Juego jg) {
             tvTitulo.setText(jg.getNombre());
         }
+
+
     }
 
 }

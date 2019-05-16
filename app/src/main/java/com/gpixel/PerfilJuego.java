@@ -18,6 +18,7 @@ import com.gpixel.Retrofit.APIRestService;
 import com.gpixel.Retrofit.RetrofitClient;
 import com.gpixel.javabeans.AdaptadorJuegos;
 import com.gpixel.javabeans.Juego;
+import com.gpixel.javabeans.Prueba;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,7 @@ public class PerfilJuego extends AppCompatActivity {
     private RecyclerView rvMain;
     private AdaptadorJuegos adaptador;
     private LinearLayoutManager llm;
+    String id;
 
     private ArrayList<Juego> datos;
     Juego juego;
@@ -50,49 +52,64 @@ public class PerfilJuego extends AppCompatActivity {
         rvMain.setLayoutManager(llm);
 
         /*CARGAR DATOS*/
-        //cargarDatos();
+       //cargarDatos();
         consumirWS();
         //prueba();
 
     }
     public void consumirWS(){
+        if(isNetworkAvailable()){
         Retrofit r = RetrofitClient.getClient(APIRestService.BASE_URL);
         APIRestService ars = r.create(APIRestService.class);
-        Call<Juego> call = ars.obtenerJuego(ars.Key,ars.format,ars.field_list);
+        Call<Prueba> call = ars.obtenerPrueba(ars.Key,ars.format,ars.field_list);
 
-        call.enqueue(new Callback<Juego>() {
+        call.enqueue(new Callback<Prueba>() {
+
 
             @Override
-            public void onResponse(Call<Juego> call, Response<Juego> response) {
+            public void onResponse(Call<Prueba> call, Response<Prueba> response) {
                 if(response.isSuccessful()) {
-                    Juego juego = response.body();
-                    datos.add(juego);
-                    adaptador.notifyDataSetChanged();
+                    Prueba juego = response.body();
+                    datos=juego.getResults();
+                    adaptador.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i=new Intent(PerfilJuego.this,ActivityRegistrar.class);
+                        }
+                    });
+
+
+                    adaptador = new AdaptadorJuegos(datos);
+                    rvMain.setAdapter(adaptador);
+
+                    //adaptador.notifyDataSetChanged();
 
                 } else {
                     System.out.print("Eres un inutil");
                 }
+                adaptador.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Juego juego=datos.get(rvMain.getChildAdapterPosition(v));
+                        Intent i=new Intent(PerfilJuego.this,ActivityMenu.class);
+                        i.putExtra("nombre",juego.getNombre());
+                        i.putExtra("descripcion",juego.getDescripcion());
+                        i.putExtra("fecha",juego.getFecha());
+                        startActivity(i);
+                    }
+                });
             }
 
             @Override
-            public void onFailure(Call<Juego> call, Throwable t) {
+            public void onFailure(Call<Prueba> call, Throwable t) {
                 System.out.print("Eres un inutil");
 
             }
         });
-    }
+    }}
 
 
-   private void prueba(){
-        Juego J1=new Juego("pureba 1","1");
-        Juego j2=new Juego("prueba 2","2");
-        Juego j3=new Juego("prueba 3","3");
-        datos.add(J1);
-        datos.add(j2);
-        datos.add(j3);
-       adaptador = new AdaptadorJuegos(datos);
-       rvMain.setAdapter(adaptador);
-          }
+
 
     private void cargarDatos( ) {
 

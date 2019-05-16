@@ -6,23 +6,25 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Juego implements Serializable {
-    @SerializedName("nombre")
+    @SerializedName("name")
     @Expose
     private String nombre;
+    @SerializedName("deck")
+    @Expose
+    private String descripcion;
 
-    @SerializedName("id")
+    @SerializedName("guid")
     @Expose
     private String id;
+    @SerializedName("original_release_date")
+    @Expose
+    private String fecha;
 
-    public Juego(String nombre, String id) {
-        this.nombre = nombre;
-        this.id=id;
-    }
+
 
     public String getNombre() {
         return nombre;
     }
-
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -34,5 +36,28 @@ public class Juego implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Juego(String nombre, String descripcion, String id, String fecha) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.id = id;
+        this.fecha = fecha;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 }
