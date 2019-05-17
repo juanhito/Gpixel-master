@@ -4,18 +4,29 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Juego implements Serializable {
+
+
+    @SerializedName("platforms")
+    @Expose
+    private ArrayList <plataformas>plataformasAL;
     @SerializedName("name")
     @Expose
     private String nombre;
+
     @SerializedName("deck")
     @Expose
     private String descripcion;
 
+
+
     @SerializedName("guid")
     @Expose
     private String id;
+
+
     @SerializedName("original_release_date")
     @Expose
     private String fecha;
@@ -38,11 +49,16 @@ public class Juego implements Serializable {
         this.id = id;
     }
 
-    public Juego(String nombre, String descripcion, String id, String fecha) {
+    public ArrayList<plataformas> getPlataformasAL() {
+        return plataformasAL;
+    }
+
+    public Juego(String nombre, String descripcion, String id, String fecha, ArrayList<plataformas>plataformasAL) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.id = id;
         this.fecha = fecha;
+        this.plataformasAL=plataformasAL;
     }
 
     public String getDescripcion() {

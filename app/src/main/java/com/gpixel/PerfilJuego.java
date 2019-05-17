@@ -19,6 +19,7 @@ import com.gpixel.Retrofit.RetrofitClient;
 import com.gpixel.javabeans.AdaptadorJuegos;
 import com.gpixel.javabeans.Juego;
 import com.gpixel.javabeans.Prueba;
+import com.gpixel.javabeans.plataformas;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,8 @@ public class PerfilJuego extends AppCompatActivity {
     String id;
 
     private ArrayList<Juego> datos;
+    private ArrayList<String>datos2;
+    private ArrayList<plataformas>datos3;
     Juego juego;
 
     @Override
@@ -46,10 +49,11 @@ public class PerfilJuego extends AppCompatActivity {
         datos=new ArrayList<Juego>();
         adaptador=new AdaptadorJuegos(datos);
         llm = new LinearLayoutManager(this);
-
+        datos2=new ArrayList<String>();
         rvMain.setItemAnimator(new DefaultItemAnimator());
         rvMain.setAdapter(adaptador);
         rvMain.setLayoutManager(llm);
+        datos3=new ArrayList<plataformas>();
 
         /*CARGAR DATOS*/
        //cargarDatos();
@@ -71,12 +75,14 @@ public class PerfilJuego extends AppCompatActivity {
                 if(response.isSuccessful()) {
                     Prueba juego = response.body();
                     datos=juego.getResults();
+
                     adaptador.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent i=new Intent(PerfilJuego.this,ActivityRegistrar.class);
                         }
                     });
+
 
 
                     adaptador = new AdaptadorJuegos(datos);
@@ -91,10 +97,21 @@ public class PerfilJuego extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Juego juego=datos.get(rvMain.getChildAdapterPosition(v));
+                        datos3=juego.getPlataformasAL();
+                        for(int j=0;j<=datos3.size()-1;j++){
+                            plataformas plat= datos3.get(j);
+                            String pene=plat.getNombre();
+                            datos2.add(pene);
+
+
+
+                        }
                         Intent i=new Intent(PerfilJuego.this,ActivityMenu.class);
                         i.putExtra("nombre",juego.getNombre());
                         i.putExtra("descripcion",juego.getDescripcion());
                         i.putExtra("fecha",juego.getFecha());
+                        i.putExtra("plataformas",datos2);
+
                         startActivity(i);
                     }
                 });

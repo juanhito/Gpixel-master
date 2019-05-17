@@ -18,65 +18,41 @@
         tools:layout_editor_absoluteY="34dp"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/tvgenero"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="-26dp"
-        android:layout_marginEnd="105dp"
-        android:layout_marginRight="105dp"
-        android:text="Nombre del juego"
-        tools:layout_editor_absoluteX="210dp"
-        tools:layout_editor_absoluteY="34dp" />
-
-    <TextView
-        android:id="@+id/genero"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="173dp"
-        android:layout_marginRight="173dp"
-        android:text="genero" />
-
-    <TextView
-        android:id="@+id/sinopsis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="142dp"
-        android:layout_marginEnd="163dp"
-        android:layout_marginRight="163dp"
-        android:text="sinopsis" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="192dp"
-        android:layout_marginEnd="121dp"
-        android:layout_marginRight="121dp"
-        android:text="media estrellas" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="390dp"
+    <LinearLayout
+        android:layout_width="264dp"
+        android:layout_height="447dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="341dp"
-        android:text="Recycler coon Comentarios" />
+        android:layout_marginStart="147dp"
+        android:layout_marginLeft="147dp"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvNombre"
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvDesc"
+            android:layout_width="296dp"
+            android:layout_height="35dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvFecha"
+            android:layout_width="275dp"
+            android:layout_height="120dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvPlataformas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+    </LinearLayout>
+
 </RelativeLayout>
