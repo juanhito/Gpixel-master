@@ -22,9 +22,11 @@ public interface APIRestService {
 
     public static final String Key="bd2514fa50bc7f31b80992f4dd257af11aa48f96";
     public static final String format="json";
-    public static final String field_list="name,deck,original_release_date,platforms";
+    public static final String field_list="name,deck,original_release_date,platforms,image";
+    public static final String filter="platforms:35|18|94|20|36|117|129|145|146|157";
+    public static final String filterps4="platforms:145|146|157|117";
    @GET("games/")
-   Call<ArrayList<Juego>> obtenerCds(@Query("api_key")String Key,@Query("format")String format,@Query("field_list")String name);
+   Call<ArrayList<Juego>> obtenerCds(@Query("api_key")String Key,@Query("format")String format,@Query("field_list")String name,@Query("filter")String filtro);
 
     @GET("games/")
     Call<Prueba>obtenerPrueba2();
@@ -33,7 +35,7 @@ public interface APIRestService {
     Call<Juego> obtenerJuego(@Query("api_key")String Key,@Query("format")String format,@Query("field_list")String nombre);
 
     @GET("games/")
-    Call<Prueba> obtenerPrueba(@Query("api_key")String Key, @Query("format")String format, @Query("field_list")String nombre);
+    Call<Prueba> obtenerPrueba(@Query("api_key")String Key, @Query("format")String format, @Query("field_list")String nombre,@Query("filter")String filtro);
 
 
 

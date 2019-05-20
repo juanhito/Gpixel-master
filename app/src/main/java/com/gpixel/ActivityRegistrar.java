@@ -6,9 +6,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
+/*import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+*/
 import com.gpixel.javabeans.Usuario;
 
 
@@ -17,13 +18,14 @@ public class ActivityRegistrar extends AppCompatActivity {
     private EditText etContrasenna;
     private EditText etRepetirCont;
     private EditText etCorreo;
-    private DatabaseReference dbR;
+   // private DatabaseReference dbR;
     private String NombreUsuario;
     private String Contrasenna;
     private String Correo;
     private String repetir;
-    private FirebaseAuth fba;
+    /*private FirebaseAuth fba;
     private FirebaseUser user;
+    */
     private Usuario usuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,10 @@ public class ActivityRegistrar extends AppCompatActivity {
         etContrasenna=findViewById(R.id.etCont);
         etRepetirCont=findViewById(R.id.etConfirma);
         etCorreo=findViewById(R.id.etCorreo);
-        fba=FirebaseAuth.getInstance();
+       // fba=FirebaseAuth.getInstance();
 
     }
-    public void enviar(View v){
+   /* public void enviar(View v){
         NombreUsuario =etUsuario.getText().toString();
         Contrasenna=etContrasenna.getText().toString();
         Correo=etCorreo.getText().toString();
@@ -51,4 +53,5 @@ public class ActivityRegistrar extends AppCompatActivity {
         }
 
     }
+    */
 }

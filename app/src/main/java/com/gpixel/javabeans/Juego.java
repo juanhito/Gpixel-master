@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 public class Juego implements Serializable {
 
+    @SerializedName("image")
+    @Expose
+    private Imagen imagen;
 
     @SerializedName("platforms")
     @Expose
@@ -53,12 +56,17 @@ public class Juego implements Serializable {
         return plataformasAL;
     }
 
-    public Juego(String nombre, String descripcion, String id, String fecha, ArrayList<plataformas>plataformasAL) {
+    public Juego(String nombre, String descripcion, String id, String fecha, ArrayList<plataformas>plataformasAL,Imagen imagen) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.id = id;
         this.fecha = fecha;
         this.plataformasAL=plataformasAL;
+        this.imagen=imagen;
+    }
+
+    public Imagen getimagen() {
+        return imagen;
     }
 
     public String getDescripcion() {

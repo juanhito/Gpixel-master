@@ -1,14 +1,17 @@
 package com.gpixel.javabeans;
 
+import android.media.Image;
 import android.view.View;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.gpixel.ActivityMenu;
 import com.gpixel.R;
 
 import java.util.ArrayList;
@@ -72,17 +75,20 @@ public class AdaptadorJuegos extends RecyclerView.Adapter<AdaptadorJuegos.Juegos
     public static class JuegosViewHolder extends RecyclerView.ViewHolder {
         /*-------------------------------   ATRIBUTOS   ------------------------------------------*/
         private TextView tvTitulo;
-        private TextView tvArtista;
+        private ImageView ivIcono;
 
 
         /*-------------------------------    CONSTRUCTOR  ----------------------------------------*/
         public JuegosViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitulo = itemView.findViewById(R.id.tvNombre);
+           // ivIcono=itemView.findViewById(R.id.ivIcono);
         }
         /*----------------------------------    METODOS   ----------------------------------------*/
         public void bindJuego(Juego jg) {
             tvTitulo.setText(jg.getNombre());
+            //new ActivityMenu.DownloadImageTask(ivIcono)
+              //      .execute(jg.getimagen().getIcono());
         }
 
 

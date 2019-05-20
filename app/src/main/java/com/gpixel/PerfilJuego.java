@@ -10,13 +10,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.gpixel.Retrofit.APIRestService;
 import com.gpixel.Retrofit.RetrofitClient;
 import com.gpixel.javabeans.AdaptadorJuegos;
+import com.gpixel.javabeans.Imagen;
 import com.gpixel.javabeans.Juego;
 import com.gpixel.javabeans.Prueba;
 import com.gpixel.javabeans.plataformas;
@@ -35,11 +35,12 @@ public class PerfilJuego extends AppCompatActivity {
     private LinearLayoutManager llm;
     String id;
 
+
     private ArrayList<Juego> datos;
     private ArrayList<String>datos2;
     private ArrayList<plataformas>datos3;
     Juego juego;
-
+    Imagen imag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +55,6 @@ public class PerfilJuego extends AppCompatActivity {
         rvMain.setAdapter(adaptador);
         rvMain.setLayoutManager(llm);
         datos3=new ArrayList<plataformas>();
-
         /*CARGAR DATOS*/
        //cargarDatos();
         consumirWS();
@@ -65,7 +65,7 @@ public class PerfilJuego extends AppCompatActivity {
         if(isNetworkAvailable()){
         Retrofit r = RetrofitClient.getClient(APIRestService.BASE_URL);
         APIRestService ars = r.create(APIRestService.class);
-        Call<Prueba> call = ars.obtenerPrueba(ars.Key,ars.format,ars.field_list);
+        Call<Prueba> call = ars.obtenerPrueba(ars.Key,ars.format,ars.field_list,ars.filterps4);
 
         call.enqueue(new Callback<Prueba>() {
 
@@ -98,6 +98,8 @@ public class PerfilJuego extends AppCompatActivity {
                     public void onClick(View v) {
                         Juego juego=datos.get(rvMain.getChildAdapterPosition(v));
                         datos3=juego.getPlataformasAL();
+                        imag=juego.getimagen();
+
                         for(int j=0;j<=datos3.size()-1;j++){
                             plataformas plat= datos3.get(j);
                             String pene=plat.getNombre();
@@ -107,6 +109,7 @@ public class PerfilJuego extends AppCompatActivity {
 
                         }
                         Intent i=new Intent(PerfilJuego.this,ActivityMenu.class);
+                        i.putExtra("imagen",imag.getImagen());
                         i.putExtra("nombre",juego.getNombre());
                         i.putExtra("descripcion",juego.getDescripcion());
                         i.putExtra("fecha",juego.getFecha());
@@ -134,7 +137,7 @@ public class PerfilJuego extends AppCompatActivity {
        if (isNetworkAvailable()) {
             Retrofit r = RetrofitClient.getClient(APIRestService.BASE_URL);
             APIRestService ars = r.create(APIRestService.class);
-            Call<ArrayList<Juego>> call = ars.obtenerCds("bd2514fa50bc7f31b80992f4dd257af11aa48f96","json","name");
+            Call<ArrayList<Juego>> call = ars.obtenerCds("bd2514fa50bc7f31b80992f4dd257af11aa48f96","json","name","");
 
             call.enqueue(new Callback<ArrayList<Juego>>() {
 

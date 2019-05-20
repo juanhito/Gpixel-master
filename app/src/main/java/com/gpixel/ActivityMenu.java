@@ -1,13 +1,26 @@
 package com.gpixel;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gpixel.javabeans.plataformas;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+
+import retrofit2.http.HTTP;
 
 public class ActivityMenu extends AppCompatActivity {
     TextView tvNombre;
@@ -19,6 +32,10 @@ public class ActivityMenu extends AppCompatActivity {
     String id;
     TextView tvPlatafor;
     String total="";
+    ImageView iv;
+    private Bitmap loadedImage;
+
+    String url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +50,11 @@ public class ActivityMenu extends AppCompatActivity {
         fecha= getIntent().getStringExtra("fecha");
         descripcion=getIntent().getStringExtra("descripcion");
         datos2=getIntent().getStringArrayListExtra("plataformas");
+        url=getIntent().getStringExtra("imagen");
         id=getIntent().getStringExtra("id");
+        new DownloadImageTask((ImageView) findViewById(R.id.imageView))
+                .execute(url);       // downloadFile(url);
+
 
 
         tvNombre.setText(nombre);
@@ -48,6 +69,50 @@ public class ActivityMenu extends AppCompatActivity {
 
         tvPlatafor.setText(total);
 
-        System.out.println("todo bien todo correcto");
+
+    }
+
+    private void downloadFile(String urlImagen) {
+        URL imageUrl=null;
+        try {
+            imageUrl=new URL(urlImagen);
+            HttpURLConnection conn =(HttpURLConnection)imageUrl.openConnection();
+            conn.connect();
+            loadedImage= BitmapFactory.decodeStream(conn.getInputStream());
+            iv.setImageBitmap(loadedImage);
+
+
+
+        } catch (IOException e) {
+            Toast.makeText(getApplicationContext(), "Error cargando la imagen: "+e.getMessage(), Toast.LENGTH_LONG).show();
+
+            e.printStackTrace();
+        }
+
+
+    }
+    public static class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 }
