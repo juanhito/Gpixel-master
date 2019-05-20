@@ -25,6 +25,7 @@ public interface APIRestService {
     public static final String field_list="name,deck,original_release_date,platforms,image";
     public static final String filter="platforms:35|18|94|20|36|117|129|145|146|157";
     public static final String filterps4="platforms:145|146|157|117";
+    public static final String filtro="name:";
    @GET("games/")
    Call<ArrayList<Juego>> obtenerCds(@Query("api_key")String Key,@Query("format")String format,@Query("field_list")String name,@Query("filter")String filtro);
 
@@ -36,7 +37,8 @@ public interface APIRestService {
 
     @GET("games/")
     Call<Prueba> obtenerPrueba(@Query("api_key")String Key, @Query("format")String format, @Query("field_list")String nombre,@Query("filter")String filtro);
-
+    @GET("games/")
+    Call<Prueba>filtrarNombre(@Query("api_key")String key,@Query("format")String format, @Query("field_list")String nombre,@Query("filter")String filtroNomb);
 
 
 
