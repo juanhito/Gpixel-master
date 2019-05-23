@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.gpixel.ActivityMenu;
 import com.gpixel.R;
 
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public class AdaptadorJuegos extends RecyclerView.Adapter<AdaptadorJuegos.Juegos
     @NonNull
     @Override
     public JuegosViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.juego_layout, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.juego_item, viewGroup, false);
         v.setOnClickListener(this);
         JuegosViewHolder cvh = new JuegosViewHolder(v);
         return cvh;

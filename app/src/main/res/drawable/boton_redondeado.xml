@@ -6,10 +6,6 @@
 
 
     <solid android:color="#ffffa5"/>
-    <stroke
-        android:width="4dp"
-        android:color="@color/moradoOscuro"
 
-        />
 
 </shape>

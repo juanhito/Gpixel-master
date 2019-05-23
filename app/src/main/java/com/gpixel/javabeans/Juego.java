@@ -84,4 +84,7 @@ public class Juego implements Serializable {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
+    public Juego() {
+    }
 }

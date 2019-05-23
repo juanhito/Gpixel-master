@@ -9,5 +9,6 @@
 
         <color name="moradoOscuro">#aa56b6</color>
         <color name="amarilloClaro">#ffffa5</color>
+        <color name="common_google_signin_btn_text_dark_default"></color>
     </resources>
 

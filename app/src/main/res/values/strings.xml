@@ -1,11 +1,7 @@
 <resources>
     <string name="app_name">Gpixel</string>
-    <string name="txtCorreo">Correo</string>
-    <string name="txtContrasenna">Contraseña</string>
-    <string name="txtIniciarSesion">Iniciar Sesión</string>
-    <string name="txtRegistrar">¡Registrate!</string>
-    <string name="txtNombUsur">Nombre de usuario</string>
-    <string name="txtRegistro">Registro</string>
-    <string name="txtConfirmar">Confirmar Contraseña</string>
-    <string name="txtCrearCuenta">Crear cuenta</string>
+    <string name="tv_title">GPixel</string>
+    <string name="tv_slogan">¡Buscando una nueva aventura!</string>
+    <string name="msj_no_registrado">No se ha podido registrar</string>
+    <string name="msj_registrado">Se ha registrado</string>
 </resources>
